@@ -1,18 +1,17 @@
-function volume_sphere() {
-	let rad=document.getElementById("radius");
-	let vol=document.getElementById("volume");
-	let value=parseInt(rad.value);
-	if(isNaN(value) || value<0){
-		vol.innerHTML='NaN';
-	}else{
-		let calc=((4/3)*(22/7)*Math.pow(value,3)).toFixed(4);
-		vol.innerHTML=calc;
-	}
-} 
+function volume_sphere(event) {
+    event.preventDefault(); // Prevent form submission
 
-window.onload = function() {
-    document.getElementById('MyForm').onsubmit = function(event) {
-        event.preventDefault(); // This line prevents the form from being submitted which would cause a page refresh.
-        volume_sphere();
-    };
+    let rad = document.getElementById("radius");
+    let vol = document.getElementById("volume");
+    let value = parseFloat(rad.value); // Use parseFloat for decimals
+
+    if (isNaN(value) || value < 0) {
+        vol.value = 'NaN'; // Show error message in volume field
+    } else {
+        let calc = ((4 / 3) * Math.PI * Math.pow(value, 3)).toFixed(4); // Use Math.PI for better accuracy
+        vol.value = calc; // Set the calculated value
+    }
 }
+
+
+window.onload = document.getElementById('MyForm').onsubmit = volume_sphere;
